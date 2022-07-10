@@ -156,6 +156,6 @@ function getUserRooms(socket) {
   }, [])
 }
 
-server.listen(80, () => {
+server.listen(process.env.PORT || 80, () => {
   console.log("Server Is Listening On http://Localhost")
 })
