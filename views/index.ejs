@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/css/navbar.css">
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="/static/css/footer.css">
+    <link rel="shortcut icon" href="/static/Images/chatLogo.png" type="image/x-icon">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,1,0" />
+    <script src="/socket.io/socket.io.js" defer></script>
+    
+    <script>
+      const rooms = `<%- publicRooms %>`
+      const parsedrooms = JSON.parse(rooms)
+      Object.values(parsedrooms).forEach(room => {
+          console.log(room.author)
+      });
+    </script>
+
+    <title>LeetFeetChat</title>
+  </head>
+  <body>
+    
+    <%- include('partials/header.ejs') %>
+
+    <div class="container">
+          <div class="btn-container">
+            <div class="second-btn-container">
+              <button class="public-btn bg-blue">Public</button>
+              <button class="private-btn">Private</button>
+            </div>
+          </div>
+
+          <div class="rooms-container">
+            
+            <div class="publicRooms">
+              <div class="create-publicRoom-div">
+                <a href="#">Create Public Room</a>
+              </div>
+
+              <% Object.values(JSON.parse(publicRooms)).forEach((room, index) => { %>
+                <div class="room-details-div">
+                  <div class="room-details-second-div">
+                    <p class="main-heading"><%= room.name %></p>
+
+                    <p class="room-url"><%= room.author %></p>
+                  </div>
+                  <div class="join-btn-div">
+                    <button onclick="select(this)">Join</button>
+                  </div>
+                </div>
+              <% }) %>
+              
+              
+            </div>
+  
+            <div class="privateRooms">
+              <div class="create-privateRoom-div">
+                <a href="#">Create Private Room</a>
+              </div>
+
+              <div class="room-joining-form">
+                <input type="text" name="" id="room-id" placeholder="Room ID">
+                <input type="text" name="" id="room-password" placeholder="Room Password">
+                <button id="join-privateRoom-btn">Join Room</button>
+              </div>
+            </div>
+          </div>
+    </div>
+
+    <%- include('partials/footer.ejs') %>
+  </body>
+  
+  <script src="/static/js/script.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="/static/js/navbar.js" defer></script>
+  <script type="module">
+    import { Eggy } from "../static/toasts/js/eggy.js";
+
+      join_privateRoom_btn.onclick = ()=>{
+        
+        if(roomId.value.trim().length < 15){
+          return Eggy({
+            title:  'Room Joining Failed',
+            message:  "Room Id Cannot Be Smaller Than 15 Characters",
+            type: 'error'
+          })          
+        }
+
+        if(!roomPass.value.trim()){
+          return Eggy({
+            title:  'Room Joining Failed',
+            message:  "Password Cannot Be Empty",
+            type: 'error'
+          })       
+        }
+
+        
+        location.href = `/private-rooms/${roomId.value}?pwd=${roomPass.value}`
+      }
+  </script>
+</html>

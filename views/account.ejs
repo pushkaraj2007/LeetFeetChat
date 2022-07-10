@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Account || LeetFeetChat.com</title>
+    <link rel="shortcut icon" href="/static/Images/chatLogo.png" type="image/x-icon">
+    <link rel="stylesheet" href="/static/css/navbar.css">
+    <link rel="stylesheet" href="/static/css/account.css">
+</head>
+<body>
+    <%- include('partials/header.ejs') %>
+    
+    <div class="container">
+
+        <div class="information-container">
+            <div class="profile-img-div">
+                <!-- <img src="/static/Images/upload-img.png" class="profile-img"> -->
+                <div class="update-img-div">
+                    <img src="/static/Images/camera.svg" alt="" srcset="" height="50px">
+                </div>
+                <input type="file" name="image" id="input-image" accept=".png, .jpg, .jpeg" hidden>
+                <img alt="" id="preview">
+            </div>
+<hr>
+            <div class="profile-information-div">
+                <div class="sub-div"> <p>Your Name</p> </div>
+                <div class="name-err-message-div">
+                    <div class="err-message">Name Must Be Greater</div>
+                    <div class="err-message">Than 5 Characters</div>
+                </div>
+                <div class="err-img-div name-err-div"><img src="/static/Images/error.svg"></div>
+                <input type="text" name="name" id="name">
+
+                <div class="sub-div"> <p>Your username</p> </div>
+                <div class="username-err-message-div">
+                    <div class="err-message">Username Must Be Greater</div>
+                    <div class="err-message">Than 3 Characters</div>
+                </div>
+                <div class="err-img-div username-err-div"><img src="/static/Images/error.svg"></div>
+                <input type="text" name="username" id="username">
+
+                <div class="sub-div"> <p>Your Email</p> </div>
+                <input type="text" name="email" id="email" disabled>
+
+                <div class="sub-div"> <p>Your Password</p> </div>
+                <input type="password" name="password" id="password" value="****" disabled>
+                <div class="change-password-div"> <a href="#">Change Password</a> </div>
+
+                <div class="save-changes-btn-div">
+                    <button class="reset-btn" disabled>Reset</button>
+                    <button class="save-btn" disabled>Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+    <script src="/static/js/navbar.js" defer></script>
+    <script src="/static/js/account.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+</html>

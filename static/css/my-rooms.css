@@ -1,0 +1,157 @@
+.container{
+    height: calc(100vh - 60px);
+    width: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.btn-container{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    margin-top: 15px;
+}
+
+.second-btn-container{
+    width: 50%;
+    padding: 6px;
+    border: 2px solid black;
+    border-radius: 50px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.btn-container button{
+    padding: 10px;
+    height: 35px;
+    width: 150px;
+    border-radius: 50px;
+    cursor: pointer;
+    border: none;
+    transition: 0.5s;
+}
+
+.bg-blue{
+    background-color: blue;
+    color: white;
+}
+
+.rooms-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 100%;
+    margin-top: 15px;
+}
+
+.publicRooms, .privateRooms{
+    max-height: 60vh;
+    overflow-y: scroll;
+    width: 50%; 
+}
+
+.privateRooms{
+    display: none;
+}
+
+.room-details-div{
+    display: flex;
+    justify-content: space-between;
+    padding-left: 5px;
+    padding-right: 10px;
+    border: 2px solid black;
+    margin-top: 5px;
+}
+
+.main-heading{
+    color: black;
+    font-size: 23px;
+}
+
+.room-url{
+    color: black;
+    font-size: 20px;
+}
+
+.room-id-div{
+    display: flex;
+}
+
+.room-id-div p, .room-pass{
+    color: black;
+    font-size: 20px;
+}
+
+.btn-div{
+    display: flex;
+    align-items: center;
+}
+
+.delete-btn-div, .share-btn-div{
+    display: flex;
+    align-items: center;
+}
+
+.share-img{
+    height: 25px;
+}
+
+.delete-img, .share-img{
+    padding: 8px;
+    border-radius: 50px;
+    transition: 0.1s;
+    cursor: pointer;
+}
+
+.delete-img:hover, .share-img:hover{
+    background-color: rgb(138, 135, 135);
+}
+
+.share-room-div{
+    height: 200px;
+    width: 200px;
+    position: absolute;
+    border-radius: 50px;
+    background-color: black;
+    margin-top: 150px;
+    margin-left: 30px;
+}
+
+.hide-share-div{
+    display: none;
+}
+
+::-webkit-scrollbar {
+    width: 20px;
+  }
+  
+::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #d6dee1;
+  border-radius: 20px;
+  border: 6px solid transparent;
+  background-clip: content-box;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #a8bbbf;
+}
+
+@media only screen and (max-width: 900px) {
+    .publicRooms {
+      width: 90%;
+    }
+
+    .privateRooms{
+        width: 90%;
+    }
+
+    .second-btn-container{
+        width: 90%;
+    }
+}

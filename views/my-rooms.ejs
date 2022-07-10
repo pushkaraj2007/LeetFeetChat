@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My-Rooms || LeetFeetChat.com</title>
+    <link rel="shortcut icon" href="/static/Images/chatLogo.png" type="image/x-icon">
+    <link rel="stylesheet" href="/static/css/navbar.css">
+    <link rel="stylesheet" href="/static/css/my-rooms.css">
+    <script src="/socket.io/socket.io.js" defer></script>
+</head>
+<body>
+    <%- include('partials/header.ejs') %>
+    
+    <div class="container">
+            <h1>Your Created Rooms</h1>
+
+            <div class="btn-container">
+                <div class="second-btn-container">
+                  <button class="public-btn bg-blue">Public</button>
+                  <button class="private-btn">Private</button>
+                </div>
+              </div>
+
+            <div class="rooms-container">
+                <div class="publicRooms"></div>
+                <div class="privateRooms"></div>
+                <img src="/static/Images/spinner.svg" style="height: 300px" class="spinner-img">
+            </div>
+    </div>
+
+</body>
+<script src="/static/js/navbar.js" defer></script>
+<script src="/static/js/my-rooms.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</html>

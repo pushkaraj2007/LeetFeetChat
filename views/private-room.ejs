@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat || LeetFeetChat.com</title>
+    <link rel="shortcut icon" href="/static/Images/chatLogo.png" type="image/x-icon">
+    <link rel="stylesheet" href="/static/css/chat.css">
+    <link rel="stylesheet" href="/static/css/navbar.css">
+    <script src="/socket.io/socket.io.js" defer></script>
+    <script src="/static/js/navbar.js" defer></script>
+
+    <script>
+        const roomName = `<%= roomName %>`
+        document.title = `<%= roomName %> || LeetFeetChat.com`
+    </script>
+</head>
+
+<body>
+    <%- include('partials/header.ejs') %>
+
+        <div class="container">
+            <div class="messages-div"></div>
+
+            <div class="send-message-form-div">
+                <form action="#" method="GET" class="send-message-form">
+                    <input type="text" name="" id="" class="send-message-input" placeholder="Enter Message Here">
+                    <button type="submit" class="send-message-button">
+                        <img src="/static/Images/sendImg.png" alt="" srcset="">
+                    </button>
+                </form>
+            </div>
+        </div>
+
+
+
+</body>
+    <script type="module" src="/static/js/private-room.js" defer></script>
+</html>

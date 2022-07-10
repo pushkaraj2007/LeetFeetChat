@@ -1,0 +1,106 @@
+body{
+    background: url("/static/Images/Background.png") center rgb(238, 224, 226);
+}
+
+.container{
+    height: calc(100vh - 60px);
+}
+
+.messages-div{
+    padding-left: 10px;
+    padding-right: 10px;
+    display: flex;
+    flex-direction: column;
+    padding-top: 70px;
+    padding-bottom: 70px;
+    overflow: scroll;
+    height: calc(100vh - 200px);
+}
+
+.send-message-form{
+    bottom: 0;
+    position: fixed;
+    display: flex;
+    height: 60px;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    background-color: #f0f2f5;
+}
+
+.send-message-input{
+    width: 80vw;
+    height: 20px;
+    padding: 10px;
+    outline: none;
+    border: 1px solid black;
+    border-radius: 5px;
+    font-family: 'Poppins';
+}
+
+.send-message-button{
+    width: 40px;
+    border-radius: 50px;
+    border: none;
+    padding: 5px;
+    margin-left: 5px;
+    margin-bottom: 5px;
+    cursor: pointer;
+    height: 40px;
+    background: black;
+}
+
+.message{
+    display: flex;
+    color: white;
+    padding: 5px;
+    border-radius: 5px;
+    margin-top: 15px;
+    max-width: 50vw;
+    flex-direction: column-reverse;
+    word-wrap: break-word;
+}
+
+.left{
+    align-self: flex-start;
+    background-color: #6b3f3f;
+}
+
+.right{
+    align-self: flex-end;
+    background-color: rgb(6, 182, 6);
+}
+
+.name{
+    color: white;
+    font-weight: bold;
+    border-bottom: 2px solid black;
+}
+
+.left .name{
+    border-bottom: 2px solid white;
+}
+
+.alert{
+    background-color: red;
+    align-self: center;
+}
+
+::-webkit-scrollbar {
+    width: 20px;
+  }
+  
+::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #9fb1b8;
+  border-radius: 20px;
+  border: 6px solid transparent;
+  background-clip: content-box;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #839397;
+}
