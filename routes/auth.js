@@ -86,7 +86,7 @@ router.post('/signup', upload.single('image'), async (req, res) => {
       from: 'leetfeetchat@gmail.com',
       to: req.body.email,
       subject: 'Verification Link For LeetFeetChat',
-      text: `Link For Validating You Account Is ${'http://192.168.43.86/verify-account/' + userAuthId}`
+      text: `Link For Validating You Account Is ${'http://leetfeetchat.herokuapp.com/verify-account/' + userAuthId}`
     };
 
     transporter.sendMail(mailOptions, function (error, info) {
@@ -155,7 +155,7 @@ router.post('/login', [
         from: 'leetfeetchat@gmail.com',
         to: req.body.email,
         subject: 'Verification Link For LeetFeetChat',
-        text: `Link For Validating You Account Is ${'http://192.168.43.86/verify-account/' + user.userAuthId}`
+        text: `Link For Validating You Account Is ${'http://leetfeetchat.herokuapp.com/verify-account/' + user.userAuthId}`
       };
   
       transporter.sendMail(mailOptions, function (error, info) {
