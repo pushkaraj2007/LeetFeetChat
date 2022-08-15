@@ -1,6 +1,10 @@
 ## LeetFeetChat
 
+<img src="https://user-images.githubusercontent.com/69895353/184545948-f7d6858b-5164-4c09-88fe-c9eeb7fdd220.png"/>
+
 LeetFeetChat is a messaging app. Where you can create your own Public and Private rooms and invite people's to chat into them.
+
+
 
 ## Languages/ Tool:
 
