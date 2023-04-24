@@ -11,9 +11,9 @@ const roomPass = document.getElementById('room-password')
 const join_privateRoom_btn = document.getElementById('join-privateRoom-btn');
 let nameOfRoom;
 
-createPublic_Room_Btn.addEventListener('click', (e)=>{
+createPublic_Room_Btn.addEventListener('click', (e) => {
 
-    if(userDetails.username == undefined || null){
+    if (userDetails.username == undefined || null) {
         return Swal.fire(
             'Error !',
             'You Need To Login For Creating Room',
@@ -31,10 +31,10 @@ createPublic_Room_Btn.addEventListener('click', (e)=>{
         confirmButtonColor: '#3085d6',
         confirmButtonText: 'Create'
 
-    }).then(async (result) =>{
-        if(result.isConfirmed){
+    }).then(async (result) => {
+        if (result.isConfirmed) {
 
-            if(result.value.replace(/\s+/g, '').length <= 2){
+            if (result.value.replace(/\s+/g, '').length <= 2) {
                 return Swal.fire(
                     'Error !',
                     'Room Name Must Be 3 Characters Long',
@@ -42,7 +42,7 @@ createPublic_Room_Btn.addEventListener('click', (e)=>{
                 )
             }
 
-            if(result.value.replace(/\s+/g, '').length >= 15){
+            if (result.value.replace(/\s+/g, '').length >= 15) {
                 return Swal.fire(
                     'Error !',
                     'Room Name Must Be Less Than 15 Characters',
@@ -50,24 +50,24 @@ createPublic_Room_Btn.addEventListener('click', (e)=>{
                 )
             }
 
-            let data = {room: result.value.toLowerCase().trim().replace(/\s+/g, '-'), name: result.value}
+            let data = { room: result.value.toLowerCase().trim().replace(/\s+/g, '-'), name: result.value }
             let res = await fetch('/api/createpublicroom', {
                 method: 'POST',
                 headers: {
-                     'content-type': 'application/json',
+                    'content-type': 'application/json',
                 },
-    
+
                 body: JSON.stringify(data)
             });
 
-            
+
             let receivedRes = await res.json();
 
-            if(receivedRes.error != undefined){
+            if (receivedRes.error != undefined) {
                 return Swal.fire(
-                        'Error !',
-                        receivedRes.error,
-                        'error'
+                    'Error !',
+                    receivedRes.error,
+                    'error'
                 )
             }
 
@@ -75,22 +75,22 @@ createPublic_Room_Btn.addEventListener('click', (e)=>{
                 'Created !',
                 `New Room Has Been Created.\n Note That White Spaces Has Been Replaced With '-'`,
                 'success'
-            ).then(async () =>{
+            ).then(async () => {
                 console.log(result.value)
                 nameOfRoom = result.value
             })
-            
+
         }
     })
 
 
 })
 
-createPrivate_Room_Btn.onclick = (e)=>{
+createPrivate_Room_Btn.onclick = (e) => {
 
     e.preventDefault();
 
-    if(userDetails.username == undefined || null){
+    if (userDetails.username == undefined || null) {
         return Swal.fire(
             'Error !',
             'You Need To Login For Creating Room',
@@ -108,36 +108,36 @@ createPrivate_Room_Btn.onclick = (e)=>{
         focusConfirm: false,
         preConfirm: () => {
             return [
-              document.getElementById('swal-input1').value,
-              document.getElementById('swal-input2').value
+                document.getElementById('swal-input1').value,
+                document.getElementById('swal-input2').value
             ]
-          }
-    }).then(async (result) =>{
-        if(result.isConfirmed){
-            if(result.value[0].trim().length < 3 && result.value[1].trim().length < 3){
+        }
+    }).then(async (result) => {
+        if (result.isConfirmed) {
+            if (result.value[0].trim().length < 3 && result.value[1].trim().length < 3) {
                 return Swal.fire(
                     'Failed !',
                     `Room Name And Password Must Be 3 Characters`,
                     'error'
                 )
             }
-            let data = {password: result.value[1], name: result.value[0].trim()}
+            let data = { password: result.value[1], name: result.value[0].trim() }
             let res = await fetch('/api/createprivateroom', {
                 method: 'POST',
                 headers: {
-                     'content-type': 'application/json',
+                    'content-type': 'application/json',
                 },
-    
+
                 body: JSON.stringify(data)
             });
 
             let receivedRes = await res.json();
 
-            if(receivedRes.error != undefined){
+            if (receivedRes.error != undefined) {
                 return Swal.fire(
-                        'Error !',
-                        receivedRes.error,
-                        'error'
+                    'Error !',
+                    receivedRes.error,
+                    'error'
                 )
             }
 
@@ -151,9 +151,9 @@ createPrivate_Room_Btn.onclick = (e)=>{
     })
 }
 
-socket.on('room-created', (name, author) =>{
+socket.on('room-created', (name, author) => {
     const roomDetails_Div = document.createElement('div')
-    
+
     roomDetails_Div.innerHTML = `<div class="room-details-second-div">
                                     <p class="main-heading">${name}</p>
                                     <p class="room-url">${author}</p>
@@ -163,10 +163,10 @@ socket.on('room-created', (name, author) =>{
                                     </div>`
     roomDetails_Div.classList.add('room-details-div')
     publicRooms.append(roomDetails_Div)
-    
+
 })
 
-const select = (button)=>{
+const select = (button) => {
     Swal.fire({
         title: 'Join Room ?',
         input: 'Do You Want To Join This Room',
@@ -174,33 +174,33 @@ const select = (button)=>{
         cancelButtonColor: '#d33',
         confirmButtonColor: '#3085d6',
         confirmButtonText: 'Join'
-    }).then(async (result) =>{
-        if(result.isConfirmed){
+    }).then(async (result) => {
+        if (result.isConfirmed) {
             location.href = `/public-rooms/${button.parentElement.parentElement.firstElementChild.firstElementChild.innerText.toLowerCase().trim().replace(/\s+/g, '-')}`
         }
     })
-    
+
 }
 
-socket.on('room-deleted', (room) =>{
+socket.on('room-deleted', (room) => {
     console.log(room)
 
     document.querySelectorAll('.main-heading').forEach(element => {
-        if(room == element.innerText.toLowerCase().trim().replace(/\s+/g, '-')){
+        if (room == element.innerText.toLowerCase().trim().replace(/\s+/g, '-')) {
             element.parentElement.parentElement.remove()
         }
     })
 })
 
 
-publicBtn.onclick = ()=>{
+publicBtn.onclick = () => {
     publicBtn.classList.add('bg-blue');
     privateBtn.classList.remove('bg-blue');
     publicRooms.style.display = 'block';
     privateRooms.style.display = 'none';
 }
 
-privateBtn.onclick = ()=>{
+privateBtn.onclick = () => {
     privateBtn.classList.add('bg-blue');
     publicBtn.classList.remove('bg-blue');
     privateRooms.style.display = 'block';

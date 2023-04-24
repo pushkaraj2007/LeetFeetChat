@@ -15,19 +15,19 @@ const usernameErrMessageDiv = document.querySelector('.username-err-message-div'
 const updateImgDiv = document.querySelector('.update-img-div')
 const preview = document.getElementById('preview')
 
-nameErrDivImg.onmouseenter = ()=>{
+nameErrDivImg.onmouseenter = () => {
     nameErrMessageDiv.style.display = 'flex'
 }
 
-nameErrDivImg.onmouseleave = ()=>{
+nameErrDivImg.onmouseleave = () => {
     nameErrMessageDiv.style.display = 'none';
 }
 
-usernameErrDivImg.onmouseenter = ()=>{
+usernameErrDivImg.onmouseenter = () => {
     usernameErrMessageDiv.style.display = 'flex'
 }
 
-usernameErrDivImg.onmouseleave = ()=>{
+usernameErrDivImg.onmouseleave = () => {
     usernameErrMessageDiv.style.display = 'none';
 }
 
@@ -44,14 +44,14 @@ const checkUser = setInterval(() => {
         nameOfUser.value = userDetails.name;
         username.value = userDetails.username;
         email.value = userDetails.email;
-        if(userDetails.imageUrl != undefined && userDetails.imageUrl != 'none'){
+        if (userDetails.imageUrl != undefined && userDetails.imageUrl != 'none') {
             updateImgDiv.style.backgroundImage = `url(${userDetails.imageUrl})`
         }
     }
 }, 100);
 
-document.onkeyup = ()=>{
-    if(username.value.trim() == userDetails.username && nameOfUser.value == userDetails.name){
+document.onkeyup = () => {
+    if (username.value.trim() == userDetails.username && nameOfUser.value == userDetails.name) {
         removeBtn();
     }
 }
@@ -62,23 +62,23 @@ nameOfUser.onkeyup = () => {
         nameErrDiv.style.display = 'none'
     }
 
-    if(nameOfUser.value.trim().length < 5){
+    if (nameOfUser.value.trim().length < 5) {
         Btn.forEach(btn => {
             btn.style.opacity = '0.4'
             btn.style.cursor = 'default'
             btn.setAttribute('disabled', 'true')
-        }) 
+        })
 
         nameErrDiv.style.display = 'flex';
     }
 
-    if(nameOfUser.value.trim() == userDetails.name){   
+    if (nameOfUser.value.trim() == userDetails.name) {
         nameErrDiv.style.display = 'none'
     }
 
 }
 
-username.onkeyup = (e)=>{
+username.onkeyup = (e) => {
     if (e.key == " " || e.code == "Space" || e.keyCode == 32) {
         e.preventDefault()
     }
@@ -88,12 +88,12 @@ username.onkeyup = (e)=>{
         usernameErrDiv.style.display = 'none'
     }
 
-    if(username.value.trim().replace(/\s+/g, '').length < 3){
+    if (username.value.trim().replace(/\s+/g, '').length < 3) {
         removeBtn()
         usernameErrDiv.style.display = 'flex'
     }
 
-    if(username.value.trim() == userDetails.username){
+    if (username.value.trim() == userDetails.username) {
         usernameErrDiv.style.display = 'none'
     }
 
@@ -103,13 +103,13 @@ SaveBtn.onclick = async () => {
     const ChangeAccountDetails = async () => {
         let data = { username: username.value, name: nameOfUser.value, image: Inputimage.files[0] }
 
-        if(Inputimage.files[0]){
+        if (Inputimage.files[0]) {
             data.imageUrl = userDetails.imageUrl
         }
 
-        const form  = new FormData();
+        const form = new FormData();
 
-        for(const name in data) {
+        for (const name in data) {
             form.append(name, data[name]);
         }
 
@@ -122,7 +122,7 @@ SaveBtn.onclick = async () => {
 
         let receivedRes = await res.json();
 
-        if(receivedRes.error != undefined){
+        if (receivedRes.error != undefined) {
             return Swal.fire("Can't Save Changes", receivedRes.error, 'error')
         }
 
@@ -216,14 +216,14 @@ changePasswordBtn.onclick = (e) => {
     })
 }
 
-updateImgDiv.onclick = ()=>{
+updateImgDiv.onclick = () => {
     Inputimage.click();
 }
 
-Inputimage.onchange = ()=>{
+Inputimage.onchange = () => {
     AddBtn()
     const reader = new FileReader()
-    reader.addEventListener('load', ()=>{
+    reader.addEventListener('load', () => {
         let uploaded_image = reader.result;
         updateImgDiv.style.backgroundImage = `url(${uploaded_image})`
     })
@@ -231,7 +231,7 @@ Inputimage.onchange = ()=>{
 }
 
 
-const removeBtn = ()=>{
+const removeBtn = () => {
     Btn.forEach(btn => {
         btn.style.opacity = '0.4'
         btn.style.cursor = 'default'
@@ -239,7 +239,7 @@ const removeBtn = ()=>{
     })
 }
 
-const AddBtn = ()=>{
+const AddBtn = () => {
     Btn.forEach(btn => {
         btn.style.opacity = '1'
         btn.style.cursor = 'pointer'

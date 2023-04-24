@@ -124,7 +124,7 @@ const deletepublicroom = async (button) => {
             }
 
             await deletemyRooms();
-            
+
             button.parentElement.parentElement.remove()
 
         }
@@ -144,7 +144,7 @@ const deleteprivateroom = async (button) => {
 
             const deletemyRooms = async () => {
                 console.log(button.parentElement.parentElement.parentElement.firstElementChild.children[1].children[1].innerText.toLowerCase().trim())
-                let data = { room: button.parentElement.parentElement.parentElement.firstElementChild.children[1].children[1].innerText.toLowerCase().trim()}
+                let data = { room: button.parentElement.parentElement.parentElement.firstElementChild.children[1].children[1].innerText.toLowerCase().trim() }
                 let res = await fetch('/api/deleteprivateroom', {
                     method: 'POST',
                     headers: {
@@ -164,14 +164,14 @@ const deleteprivateroom = async (button) => {
             }
 
             await deletemyRooms();
-            
+
             button.parentElement.parentElement.parentElement.remove()
 
         }
     })
 }
 
-socket.on('room-created', (name, author)=>{
+socket.on('room-created', (name, author) => {
     const roomDetails_Div = document.createElement('div')
 
     roomDetails_Div.innerHTML = `<div class="room-details-second-div">
@@ -188,37 +188,37 @@ socket.on('room-created', (name, author)=>{
     publicRooms.append(roomDetails_Div)
 })
 
-publicBtn.onclick = ()=>{
+publicBtn.onclick = () => {
     publicBtn.classList.add('bg-blue');
     privateBtn.classList.remove('bg-blue');
     publicRooms.style.display = 'block';
     privateRooms.style.display = 'none';
 }
 
-privateBtn.onclick = ()=>{
+privateBtn.onclick = () => {
     privateBtn.classList.add('bg-blue');
     publicBtn.classList.remove('bg-blue');
     privateRooms.style.display = 'block';
     publicRooms.style.display = 'none';
 }
 
-mainContainer.addEventListener('click', (e)=>{
+mainContainer.addEventListener('click', (e) => {
     let shareRoomDiv = document.querySelectorAll('.share-room-div');
-        // if(shareRoomDiv.className.split(' ')[1] != 'hide-share-div'){
-        //     shareRoomDiv.classList.add('hide-share-div')
-        // }
+    // if(shareRoomDiv.className.split(' ')[1] != 'hide-share-div'){
+    //     shareRoomDiv.classList.add('hide-share-div')
+    // }
 
     console.log(e.target)
 
-    if (e.target != shareRoomDiv && e.target != document.querySelectorAll('.share-img').every()){
+    if (e.target != shareRoomDiv && e.target != document.querySelectorAll('.share-img').every()) {
         shareRoomDiv.forEach(element => {
-          element.classList.add('hide-share-div')  
+            element.classList.add('hide-share-div')
         })
     }
 })
 
 
-const share = (button)=>{
+const share = (button) => {
     let shareRoomDiv = button.parentElement.parentElement.firstElementChild
     let shareRoomDivs = document.querySelectorAll('.share-room-div');
     shareRoomDivs.forEach(element => {

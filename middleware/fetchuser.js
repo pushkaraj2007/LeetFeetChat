@@ -4,14 +4,13 @@ const app = express();
 
 app.use(express.urlencoded({ extended: false }));
 
+// Fetch User
 const fetchUser = async (req, res, next)=>{
-    
     let token = req.headers.cookie
     if(!token){
         res.status(401).json({error: "You Need To Login For Getting Details"})
         // use req.user to send this data
     }
-
     else{
         try {
             token = token.split('=').filter(mycookie => mycookie.length > 100)[0]     

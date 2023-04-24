@@ -190,7 +190,7 @@ router.post('/login', [
 
 })
 
-
+// Get User
 router.post("/getuser", fetchUser, async (req, res) => {
   try {
     let userId = req.user.id;
@@ -202,6 +202,8 @@ router.post("/getuser", fetchUser, async (req, res) => {
   }
 })
 
+
+// Get Username
 router.post("/username", async (req, res) => {
   let username = await Users.findOne({ username: req.body.username });
 

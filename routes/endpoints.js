@@ -10,7 +10,7 @@ const fs = require('fs')
 const jwt = require('jsonwebtoken')
 const path = require('path')
 
-
+// Render
 router.get("/", async (req, res)=>{
     try {
         res.status(200).render("index", {publicRooms: JSON.stringify(publicRooms)})
@@ -91,10 +91,12 @@ router.post('/api/change-account-details', fetchUser, upload.single('image'), as
     res.json( {success: "Successfully Changed Account Details"} )
 })
 
+// Render My Rooms
 router.get('/my-rooms', async (req, res)=>{
     res.status(200).render("my-rooms")
 })
 
+// Get Rooms of user
 router.post('/api/get-my-rooms', fetchUser, async (req, res)=>{
 
     let user = await Users.findById(req.user.id);
@@ -116,6 +118,7 @@ router.post('/api/get-my-rooms', fetchUser, async (req, res)=>{
     res.json({rooms: myRooms})
 })
 
+// Render Public Room
 router.get('/public-rooms/:room', async (req, res) => {
     if (publicRooms[req.params.room] == null) {
       return res.redirect('/')
@@ -123,6 +126,7 @@ router.get('/public-rooms/:room', async (req, res) => {
     res.render('room', { roomName: req.params.room })
 })
 
+// Render Private Room
 router.get('/private-rooms/:room', async (req, res) => {
     if (privateRooms[req.params.room] == null) {
       return res.redirect('/')
@@ -139,6 +143,7 @@ router.get('/private-rooms/:room', async (req, res) => {
     res.render('private-room', { roomName: req.params.room })
 })
 
+// Get Private Rooms of User
 router.post('/api/get-my-private-rooms', fetchUser, async (req, res)=>{
 
     let user = await Users.findById(req.user.id);
@@ -160,6 +165,7 @@ router.post('/api/get-my-private-rooms', fetchUser, async (req, res)=>{
     res.json({rooms: myRooms})
 })
 
+// Verify Password
 router.post('/api/verify-password', fetchUser, async (req, res)=>{
     try {
         let userId = req.user.id;
@@ -182,6 +188,7 @@ router.post('/api/verify-password', fetchUser, async (req, res)=>{
     }
 })
 
+// Change Password
 router.post('/api/change-password', fetchUser, async (req, res)=>{
     let userId = req.user.id;
     let user = await Users.findById(userId);
@@ -201,6 +208,7 @@ router.post('/api/change-password', fetchUser, async (req, res)=>{
     res.status(200).json({success: "Account Password Has Been Changed"})
 })
 
+// Verify Account
 router.get('/verify-account/:id', async (req, res)=>{
     let user = await Users.findOne({userAuthId: req.params.id})
     if(!user){

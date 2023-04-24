@@ -30,6 +30,7 @@ app.set('views', path.join(__dirname, 'views')); // Set The Views Directory
 
 // socket.io Specific Stuff
 
+// Create public room
 app.post('/api/createpublicroom', fetchUser, async (req, res) => {
   if (publicRooms[req.body.room] != null) {
     return res.status(400).json({ error: "Room Name Already Exist" })
@@ -66,20 +67,14 @@ app.post('/api/createpublicroom', fetchUser, async (req, res) => {
   }
 })
 
+// Delete public room
 app.post('/api/deletepublicroom', (req, res)=>{
   delete publicRooms[req.body.room]
   res.json( { success: "Room Has Benn Deleted"} )
   io.emit('room-deleted', req.body.room.toLowerCase().trim().replace(/\s+/g, '-'))
 })
 
-app.post('/api/deleteprivateroom', (req, res)=>{
-  let room = req.body.room.toLowerCase().trim().replace(/\s+/g, '-')
-  delete privateRooms[req.body.room]
-  res.json( { success: "Room Has Benn Deleted"} )
-  io.to(room).emit('room-deleted', room)
-})
-
-
+// Create private room
 app.post('/api/createprivateroom', fetchUser, async (req, res)=>{
   console.log(req.body.name)
   console.log(req.body.password)
@@ -117,8 +112,17 @@ app.post('/api/createprivateroom', fetchUser, async (req, res)=>{
   res.json({roomId: roomId, password: req.body.password})
 })
 
+// Delete private room
+app.post('/api/deleteprivateroom', (req, res)=>{
+  let room = req.body.room.toLowerCase().trim().replace(/\s+/g, '-')
+  delete privateRooms[req.body.room]
+  res.json( { success: "Room Has Benn Deleted"} )
+  io.to(room).emit('room-deleted', room)
+})
+
 io.on('connection', socket => {
 
+  // Listen for new user joins
   socket.on('new-user-joined', (room, name) => {
     socket.join(room)
     publicRooms[room].users[socket.id] = name
@@ -126,20 +130,24 @@ io.on('connection', socket => {
     console.log(publicRooms)
   })
 
+  // Listen for new user joins in private room
   socket.on('new-user-joined-privateRoom', (room, name) =>{
     socket.join(room)
     privateRooms[room].users[socket.id] = name
     socket.to(room).emit('user-joined', name)
   })
 
+  // Listen for messages in public room
   socket.on('send', (room, message) => {
     socket.to(room).emit('receive', { message: message, name: publicRooms[room].users[socket.id] })
   })
 
+  // Listen for messages in private room
   socket.on('send-privateRoom', (room, message) => {
     socket.to(room).emit('receive', { message: message, name: privateRooms[room].users[socket.id] })
   })
 
+  // Listen for disconnect
   socket.on('disconnect', () => {
     getUserRooms(socket).forEach(room => {
 
@@ -149,6 +157,7 @@ io.on('connection', socket => {
   })
 });
 
+// Get user rooms
 function getUserRooms(socket) {
   return Object.entries(publicRooms).reduce((names, [name, room]) => {
     if (room.users[socket.id] != null) names.push(name)
@@ -157,5 +166,5 @@ function getUserRooms(socket) {
 }
 
 server.listen(process.env.PORT || 80, () => {
-  console.log("Server Is Listening On http://Localhost")
+  console.log("Server Is Listening On https://leetfeetchat.onrender.com")
 })
