@@ -16,7 +16,7 @@ LeetFeetChat is a messaging app. Where you can create your own Public and Privat
 
 ## 👩🏽‍💻 Demo
 
-Check out the website: [LeetFeetChat](https://leetfeetchat.herokuapp.com/)
+Check out the website: [LeetFeetChat](https://leetfeetchat.onrender.com/)
 
 ## 👇🏽 Prerequisites
 
